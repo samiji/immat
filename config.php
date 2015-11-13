@@ -1,8 +1,13 @@
 <?php
+session_start();
+$dbroot='localhost';
+$dbuser='root';
+$dbpass='';
+$dbname='immat';
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
+
+$link =@mysql_connect($dbroot,$dbuser,$dbpass);
+mysql_select_db("$dbname");
+mysql_query("SET NAMES 'utf8'");
+?>

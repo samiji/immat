@@ -1,6 +1,3 @@
-<?php
-include("config.php");
-?>
 <!DOCTYPE HTML>
 <html class="no-js">
     <head>
@@ -42,7 +39,7 @@ include("config.php");
                     <div class="container sp-cont">
                         <div class="site-logo">
                             <h1><a href="index.php"><img src="http://illico-immat.fr/wp-content/uploads/2015/06/illicoimmatlogo1.jpg" alt="Logo"></a></h1>
-
+                           
                         </div>
                         <div class="header-right">
                             <div class="user-login-panel logged-in-user">
@@ -65,11 +62,11 @@ include("config.php");
                                 </ul>
                             </div>
                             <div class="topnav dd-menu">
-                                <!-- <ul class="top-navigation sf-menu">
-                                     <li><a href="results-list.html">Buy</a></li>
-                                     <li><a href="add-listing-pricing.html">Sell</a></li>
-                                     <li><a href="joinus.html">Join</a></li>
-                                 </ul>-->
+                               <!-- <ul class="top-navigation sf-menu">
+                                    <li><a href="results-list.html">Buy</a></li>
+                                    <li><a href="add-listing-pricing.html">Sell</a></li>
+                                    <li><a href="joinus.html">Join</a></li>
+                                </ul>-->
                             </div>
                         </div>
                     </div>
@@ -86,23 +83,23 @@ include("config.php");
                         <nav class="main-navigation dd-menu toggle-menu" role="navigation">
                             <ul class="sf-menu">
                                 <li><a href="javascript:void(0)">Carte grise</a>
-
+                                    
                                 </li>
                                 <li><a href="javascript:void(0)">Plaques</a>
-
+                                  
                                 </li>
                                 <li class="megamenu"><a href="index.html">Prix</a>
-
+                                    
                                 </li>
                                 <li><a href="javascript:void(0)">Documents</a>
-
+                                    
                                 </li>
                                 <li><a href="javascript:void(0)">Suivi dossier</a>
-
+                                    
                                 </li>
-
+                                
                                 <li><a href="javascript:void(0)">Contact</a>
-
+                                    
                                 </li>
                             </ul>
                         </nav>
@@ -331,117 +328,11 @@ include("config.php");
 
 
                                 <div class="col-md-12 col-sm-12">
-                                    <h2>Espace d'inscription</h2>
+                                    <h2>Validation d'inscription</h2>
                                     <div class="dashboard-block">
                                         <div class="tabs profile-tabs">
-                                            <?php
-                                            if (isset($_POST['login'])) {
-                                                $login = mysql_real_escape_string($_POST["login"]);
-                                                $pwd = mysql_real_escape_string($_POST["pwd"]);
-                                                $prenom = mysql_real_escape_string($_POST["prenom"]);
-                                                $nom = mysql_real_escape_string($_POST["nom"]);
-                                                $adresse = mysql_real_escape_string($_POST["adresse"]);
-                                                $cp = mysql_real_escape_string($_POST["cp"]);
-                                                $ville = mysql_real_escape_string($_POST["ville"]);
-                                                $tel = mysql_real_escape_string($_POST["tel"]);
-                                                $fax = mysql_real_escape_string($_POST["fax"]);
-                                                $url = mysql_real_escape_string($_POST["url"]);
-                                                $siren = mysql_real_escape_string($_POST["siren"]);
-                                                $tva = mysql_real_escape_string($_POST["tva"]);
-                                                $societe = mysql_real_escape_string($_POST["societe"]);
-                                                $password = md5($pwd);
-                                                mysql_query("insert into immat_users(nom,prenom,adresse,cp,ville,tel,email,pwd,societe,fax,url,siren,numtva,date_add,status)values('" . $nom . "','" . $prenom . "','" . $adresse . "','" . $cp . "','" . $ville . "','" . $tel . "','" . $login . "','" . $password . "','" . $societe . "','" . $fax . "','" . $url . "','" . $siren . "','" . $tva . "','" . date('Y-m-d H:i:s') . "',0)")or die(mysql_error());
-                                                echo '<script>window.location="valid_inscription.php"</script>';
-                                            }
-                                            ?>
-                                            <form method="post" action="">
-                                                <div class="tab-content">
-                                                    <!-- PROFIE PERSONAL INFO -->
-                                                    <div id="personalinfo" class="tab-pane fade active in">
-
-                                                        <div class="row">
-
-                                                            <div class="col-md-8">
-                                                                <div class="signup-form">
-                                                                    <div class="row">
-                                                                        <div class="col-md-6">
-                                                                            <label>Nom d'utilisateur</label>
-                                                                            <input type="email" class="form-control" name="login" placeholder="mail@example.com" required>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-md-6 ">
-                                                                            <div class="" style="position: relative; display: block; vertical-align: baseline; margin: 0px 0px 5px;"><input type="password" name="pwd" placeholder="Saisir un mot de passe" class="form-control password-input margin-5 hideShowPassword-field" style="margin: 0px; padding-right: 46px;"></div>
-                                                                            <a class="password-generate pass-actions" href="javascript:void(0);"><i class="fa fa-refresh"></i></a>
-                                                                            <div class="progress"><div style="width: 0%" class="progress-bar password-output"></div></div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <hr>
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <label>Prénom *</label>
-                                                                        <input type="text" name="prenom" class="form-control" placeholder="" required>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <label>Nom</label>
-                                                                        <input type="text" name="nom" class="form-control" placeholder="">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <label>Société *</label>
-                                                                        <input type="text" name="societe" class="form-control" placeholder="" required>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <label>Téléphone</label>
-                                                                        <input type="text" name="tel" class="form-control" placeholder="">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <label>Adresse *</label>
-                                                                        <textarea type="text" name="adresse" class="form-control" placeholder="" required></textarea>
-                                                                    </div>
-
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <label>Code postal *</label>
-                                                                        <input type="text" name="cp" class="form-control" placeholder="" required>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <label>Ville</label>
-                                                                        <input type="text" name="ville" class="form-control" placeholder="">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <label>Fax</label>
-                                                                        <input type="text" name="fax" class="form-control" placeholder="" required>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <label>Site web</label>
-                                                                        <input type="text" name="url" class="form-control" placeholder="">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <label>SIREN</label>
-                                                                        <input type="text" name="siren" class="form-control" placeholder="" required>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <label>Numéro TVA</label>
-                                                                        <input type="text" name="tva" class="form-control" placeholder="">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <button type="submit" class="btn btn-info">Créer mon compte</button>
-                                            </form>
+                                          Merci, votre compte est activé. 
+                                            
                                         </div>
                                     </div>
                                 </div>
