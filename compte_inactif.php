@@ -47,14 +47,12 @@
                     <div class="container">
                         <div class="dashboard-wrapper">
                             <div class="row">
-
-
                                 <div class="col-md-12 col-sm-12">
-                                    <h2>Validation d'inscription</h2>
+                                    <h2>Compte inactif</h2>
                                     <div class="dashboard-block">
                                         <div class="tabs profile-tabs">
-                                          Merci, votre compte est activé. 
-                                            
+                                            Votre compte est n'est pas encore activé. Veuillez completer votre dossier pou activer votre compte. <br><br>
+                                            <a href="index.php">Retour</a> la page d'accueil.
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +125,33 @@
             <a id="back-to-top"><i class="fa fa-angle-double-up"></i></a>  
         </div>
         <!-- LOGIN POPUP -->
-         <?php include("module/login.php") ?>
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4>Login to your account</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <input type="text" class="form-control" placeholder="Username">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                <input type="password" class="form-control" placeholder="Password">
+                            </div>
+                            <input type="submit" class="btn btn-primary" value="Login">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-block btn-facebook btn-social"><i class="fa fa-facebook"></i> Login with Facebook</button>
+                        <button type="button" class="btn btn-block btn-twitter btn-social"><i class="fa fa-twitter"></i> Login with Twitter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script src="js/jquery-2.0.0.min.js"></script> <!-- Jquery Library Call -->
         <script src="vendor/prettyphoto/js/prettyphoto.js"></script> <!-- PrettyPhoto Plugin -->
         <script src="js/ui-plugins.js"></script> <!-- UI Plugins -->

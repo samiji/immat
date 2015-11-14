@@ -1,3 +1,7 @@
+<?php
+include("config.php");
+include("include/util.php");
+?>
 <!DOCTYPE HTML>
 <html class="no-js">
     <head>
@@ -35,273 +39,9 @@
         <div class="body">
             <!-- Start Site Header -->
             <div class="site-header-wrapper">
-                <header class="site-header">
-                    <div class="container sp-cont">
-                        <div class="site-logo">
-                            <h1><a href="index.php"><img src="images/illicoimmatlogo1.jpg" alt="Logo"></a></h1>
-                           
-                        </div>
-                        <div class="header-right">
-                            <div class="user-login-panel">
-                                <a href="#" class="user-login-btn" data-toggle="modal" data-target="#loginModal"><i class="icon-profile"></i></a>
-                            </div>
-                            <div class="topnav dd-menu">
-                               <!-- <ul class="top-navigation sf-menu">
-                                    <li><a href="results-list.html">Buy</a></li>
-                                    <li><a href="add-listing-pricing.html">Sell</a></li>
-                                    <li><a href="joinus.html">Join</a></li>
-                                </ul>-->
-                            </div>
-                        </div>
-                    </div>
-                </header>
+                <?php include("module/header.php"); ?>
                 <!-- End Site Header -->
-                <div class="navbar">
-                    <div class="container sp-cont">
-                        <div class="search-function">
-                            <a href="#" class="search-trigger"><i class="fa fa-search"></i></a>
-                            <span><i class="fa fa-phone"></i> Call us <strong>1800 011 2211</strong> <em>or</em> search</span>
-                        </div>
-                        <a href="#" class="visible-sm visible-xs" id="menu-toggle"><i class="fa fa-bars"></i></a>
-                        <!-- Main Navigation -->
-                        <nav class="main-navigation dd-menu toggle-menu" role="navigation">
-                            <ul class="sf-menu">
-                                <li><a href="javascript:void(0)">Carte grise</a>
-                                    
-                                </li>
-                                <li><a href="javascript:void(0)">Plaques</a>
-                                  
-                                </li>
-                                <li class="megamenu"><a href="index.html">Prix</a>
-                                    
-                                </li>
-                                <li><a href="javascript:void(0)">Documents</a>
-                                    
-                                </li>
-                                <li><a href="javascript:void(0)">Suivi dossier</a>
-                                    
-                                </li>
-                                
-                                <li><a href="javascript:void(0)">Contact</a>
-                                    
-                                </li>
-                            </ul>
-                        </nav> 
-                        <!-- Search Form -->
-                        <div class="search-form">
-                            <div class="search-form-inner">
-                                <form>
-                                    <h3>Find a Car with our Quick Search</h3>
-                                    <div class="row">
-                                        <div class="col-md-6 col-sm-6">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Postcode</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label>Body Type</label>
-                                                    <select name="Body Type" class="form-control selectpicker">
-                                                        <option selected>Any</option>
-                                                        <option>Wagon</option>
-                                                        <option>Minivan</option>
-                                                        <option>Coupe</option>
-                                                        <option>Crossover</option>
-                                                        <option>Van</option>
-                                                        <option>SUV</option>
-                                                        <option>Minicar</option>
-                                                        <option>Sedan</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Make</label>
-                                                    <select name="Make" class="form-control selectpicker">
-                                                        <option selected>Any</option>
-                                                        <option>Jaguar</option>
-                                                        <option>BMW</option>
-                                                        <option>Mercedes</option>
-                                                        <option>Porsche</option>
-                                                        <option>Nissan</option>
-                                                        <option>Mazda</option>
-                                                        <option>Acura</option>
-                                                        <option>Audi</option>
-                                                        <option>Bugatti</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label>Model</label>
-                                                    <select name="Model" class="form-control selectpicker">
-                                                        <option selected>Any</option>
-                                                        <option>GTX</option>
-                                                        <option>GTR</option>
-                                                        <option>GTS</option>
-                                                        <option>RLX</option>
-                                                        <option>M6</option>
-                                                        <option>S Class</option>
-                                                        <option>C Class</option>
-                                                        <option>B Class</option>
-                                                        <option>A Class</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Price Min</label>
-                                                    <select name="Min Price" class="form-control selectpicker">
-                                                        <option selected>Any</option>
-                                                        <option>$10000</option>
-                                                        <option>$20000</option>
-                                                        <option>$30000</option>
-                                                        <option>$40000</option>
-                                                        <option>$50000</option>
-                                                        <option>$60000</option>
-                                                        <option>$70000</option>
-                                                        <option>$80000</option>
-                                                        <option>$90000</option>
-                                                        <option>$100000</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label>Price Max</label>
-                                                    <select name="Max Price" class="form-control selectpicker">
-                                                        <option selected>Any</option>
-                                                        <option>$10000</option>
-                                                        <option>$20000</option>
-                                                        <option>$30000</option>
-                                                        <option>$40000</option>
-                                                        <option>$50000</option>
-                                                        <option>$60000</option>
-                                                        <option>$70000</option>
-                                                        <option>$80000</option>
-                                                        <option>$90000</option>
-                                                        <option>$100000</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <label class="checkbox-inline">
-                                                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Brand new only
-                                                    </label>
-                                                    <label class="checkbox-inline">
-                                                        <input type="checkbox" id="inlineCheckbox2" value="option2"> Certified
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-6">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Min Year</label>
-                                                    <select name="Min Year" class="form-control selectpicker">
-                                                        <option selected>Any</option>
-                                                        <option>2005</option>
-                                                        <option>2006</option>
-                                                        <option>2007</option>
-                                                        <option>2008</option>
-                                                        <option>2009</option>
-                                                        <option>2010</option>
-                                                        <option>2011</option>
-                                                        <option>2012</option>
-                                                        <option>2013</option>
-                                                        <option>2014</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label>Max Year</label>
-                                                    <select name="Max Year" class="form-control selectpicker">
-                                                        <option selected>Any</option>
-                                                        <option>2005</option>
-                                                        <option>2006</option>
-                                                        <option>2007</option>
-                                                        <option>2008</option>
-                                                        <option>2009</option>
-                                                        <option>2010</option>
-                                                        <option>2011</option>
-                                                        <option>2012</option>
-                                                        <option>2013</option>
-                                                        <option>2014</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Min Mileage</label>
-                                                    <select name="Min Mileage" class="form-control selectpicker">
-                                                        <option selected>Any</option>
-                                                        <option>10000</option>
-                                                        <option>20000</option>
-                                                        <option>30000</option>
-                                                        <option>40000</option>
-                                                        <option>50000</option>
-                                                        <option>60000</option>
-                                                        <option>70000</option>
-                                                        <option>80000</option>
-                                                        <option>90000</option>
-                                                        <option>100000</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label>Max Mileage</label>
-                                                    <select name="Max Mileage" class="form-control selectpicker">
-                                                        <option selected>Any</option>
-                                                        <option>10000</option>
-                                                        <option>20000</option>
-                                                        <option>30000</option>
-                                                        <option>40000</option>
-                                                        <option>50000</option>
-                                                        <option>60000</option>
-                                                        <option>70000</option>
-                                                        <option>80000</option>
-                                                        <option>90000</option>
-                                                        <option>100000</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Transmission</label>
-                                                    <select name="Transmission" class="form-control selectpicker">
-                                                        <option selected>Any</option>
-                                                        <option>5 Speed Manual</option>
-                                                        <option>5 Speed Automatic</option>
-                                                        <option>6 Speed Manual</option>
-                                                        <option>6 Speed Automatic</option>
-                                                        <option>7 Speed Manual</option>
-                                                        <option>7 Speed Automatic</option>
-                                                        <option>8 Speed Manual</option>
-                                                        <option>8 Speed Automatic</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label>Body Color</label>
-                                                    <select name="Body Color" class="form-control selectpicker">
-                                                        <option selected>Any</option>
-                                                        <option>Red</option>
-                                                        <option>Black</option>
-                                                        <option>White</option>
-                                                        <option>Yellow</option>
-                                                        <option>Brown</option>
-                                                        <option>Grey</option>
-                                                        <option>Silver</option>
-                                                        <option>Gold</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <input type="submit" class="btn btn-block btn-info btn-lg" value="Find my vehicle now">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php include("module/menu.php"); ?>
             </div>
             <div class="hero-area">
                 <!-- Search Form -->
@@ -310,29 +50,30 @@
                         <h2>Indiquez votre numéro d'immatriculation</h2>
                         <p>Service en ligne d’immatriculation habilité par l’Etat</p>
                         <div class="search-form-inner">
-                            <form>
+                            <form method="post" action="form.php">
                                 <div class="input-group input-group-lg">
-                                    <input type="text" class="form-control" style="text-align: center; font-size: 33px;" maxlength="9" placeholder="AA-123-AA ">
+                                    <input type="text" class="form-control" style="text-align: center; font-size: 33px; text-transform: uppercase" maxlength="9" placeholder="AA-123-AA" name="immat_num" required="">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-primary" type="button">Calculer le prix</button>
+                                        <button class="btn btn-primary" type="submit">Calculer le prix</button>
                                     </span>
                                 </div>
 
 
                                 <div class="row " style="margin-top: 20px;">
-                                    <div class="col-md-4">
-                                        <input type="radio" name="choix" value="">  <label style="font-size: 11px;">Changement de proprietaire</label>  
+                                    <div class="col-md-6"> 
+                                        <div class="col-md-12">
+                                            <input type="radio" name="choix" value="Changement de propriétaire" checked="">  <label style="font-size: 13px;">Changement de propriétaire</label>  
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input type="radio" name="choix" value="Changement de domicile">  <label style="font-size: 13px;">Changement de domicile</label>  
+                                        </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <input type="radio" name="choix" value="">  <label style="font-size: 11px;">Changement de domicile</label>  
+                                    <div class="col-md-6">
+                                        <input type="checkbox" name="immatricultion" value="Plaque d'immatriculation">  <label style="font-size: 13px;">Plaque d'immatriculation</label>  
                                     </div>
-                                    <div class="col-md-4">
-                                        <input type="radio" name="choix" value="">  <label style="font-size: 11px;">Plaque d'immatriculation</label>  
-                                    </div>
-                                    
-                                    
-                                    
                                 </div>
+
+
                             </form>
                         </div>
                     </div>
@@ -341,7 +82,7 @@
                 <div class="hero-slider heroflex flexslider clearfix" data-autoplay="yes" data-pagination="no" data-arrows="yes" data-style="fade" data-speed="7000" data-pause="yes">
                     <ul class="slides">
                         <li class="parallax" style="background-image:url(images/bann.jpg);"></li>
-                      
+
                     </ul>
                 </div>
                 <!-- End Hero Slider -->

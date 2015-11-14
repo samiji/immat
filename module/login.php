@@ -35,10 +35,15 @@
             success: function (data) {
                 var t = eval(data);
                 if (t[0]["message"] == "ok") {
-                    window.location = "profil.php";
+                    if (t[0]["etat"] == "1") {
+
+                        window.location = "profil.php";
+                    } else {
+                        window.location = "compte_inactif.php";
+                    }
                 } else {
                     alert("Veuillez vérifier vos paramètres de connexion !");
-                   
+
                 }
             }
         });

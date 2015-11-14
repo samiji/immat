@@ -7,10 +7,14 @@ $password = md5($pwd);
 $sql = mysql_query("select *  from immat_users where email='" . $login . "' and pwd='" . $password . "'")or die(mysql_error());
 $nb = mysql_num_rows($sql);
 if ($nb > 0) {
-    $_SESSION['user'] = $login;
+    $data = mysql_fetch_array($sql);
+
+    $etat = $data['status'];
+    if ($etat == 1)
+        $_SESSION['user'] = $login;
     $rs = "[";
 
-    $rs.="{message:'ok'},";
+    $rs.="{message:'ok',etat:'" . $etat . "'},";
 
     $rs.="]";
 } else {
