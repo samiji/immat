@@ -3,6 +3,8 @@ include("config.php");
 include("include/util.php");
 if (!isset($_SESSION['user']))
     header("location:index.php");
+
+$user = mysql_fetch_array(mysql_query("select * from immat_users where email='" . $_SESSION['user'] . "'"));
 ?>
 <!DOCTYPE HTML>
 <html class="no-js">
@@ -41,7 +43,7 @@ if (!isset($_SESSION['user']))
         <div class="body">
             <!-- Start Site Header -->
             <div class="site-header-wrapper">
-                <?php include("module/header.php"); ?>
+<?php include("module/header.php"); ?>
                 <!-- End Site Header -->
                 <?php include("module/menu.php"); ?>
             </div>
@@ -54,16 +56,11 @@ if (!isset($_SESSION['user']))
                                 <div class="col-md-3 col-sm-4">
                                     <!-- SIDEBAR -->
                                     <div class="users-sidebar tbssticky">
-                                        <a href="user-dashboard.html" class="btn btn-block btn-primary add-listing-btn">New Ad listing</a>
+                                        <a href="index.php" class="btn btn-block btn-primary add-listing-btn">Commander</a>
                                         <ul class="list-group">
-                                            <li class="list-group-item"> <span class="badge">5</span> <a href="user-dashboard.html"><i class="fa fa-home"></i> Dashboard</a></li>
-                                            <li class="list-group-item"> <span class="badge">5</span> <a href="user-dashboard-saved-searches.html"><i class="fa fa-folder-o"></i> Saved Searches</a></li>
-                                            <li class="list-group-item"> <span class="badge">12</span> <a href="user-dashboard-saved-cars.html"><i class="fa fa-star-o"></i> Saved Cars</a></li>
-                                            <li class="list-group-item"> <a href="add-listing-form.html"><i class="fa fa-plus-square-o"></i> Create new Ad</a></li>
-                                            <li class="list-group-item"> <span class="badge">2</span> <a href="user-dashboard-manage-ads.html"><i class="fa fa-edit"></i> Manage Ads</a></li>
-                                            <li class="list-group-item active"> <a href="user-dashboard-profile.html"><i class="fa fa-user"></i> My Profile</a></li>
-                                            <li class="list-group-item"> <a href="user-dashboard-settings.html"><i class="fa fa-cog"></i> Account Settings</a></li>
-                                            <li class="list-group-item"> <a href="javascript:void(0)"><i class="fa fa-sign-out"></i> Log Out</a></li>
+                                            <li class="list-group-item active"> <a href="profil.php"><i class="fa fa-user"></i> Mon profil</a></li>
+                                            
+                                            <li class="list-group-item"> <a href="logout.php"><i class="fa fa-sign-out"></i> Déconnexion</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -72,9 +69,9 @@ if (!isset($_SESSION['user']))
                                     <div class="dashboard-block">
                                         <div class="tabs profile-tabs">
                                             <ul class="nav nav-tabs">
-                                                <li class="active"> <a data-toggle="tab" href="#personalinfo" aria-controls="personalinfo" role="tab">Personal Info</a></li>
-                                                <li> <a data-toggle="tab" href="#billinginfo" aria-controls="billinginfo" role="tab">Billing Info</a></li>
-                                                <li> <a data-toggle="tab" href="#changepassword" aria-controls="changepassword" role="tab">Change Password</a></li>
+                                                <li class="active"> <a data-toggle="tab" href="#personalinfo" aria-controls="personalinfo" role="tab">Informations personnelles</a></li>
+                                                <li> <a data-toggle="tab" href="#billinginfo" aria-controls="billinginfo" role="tab">Mes commandes</a></li>
+                                                <li> <a data-toggle="tab" href="#changepassword" aria-controls="changepassword" role="tab">Changer mot de passe</a></li>
                                             </ul>
                                             <form>
                                                 <div class="tab-content">
@@ -84,37 +81,63 @@ if (!isset($_SESSION['user']))
                                                             <div class="col-md-8">
                                                                 <div class="row">
                                                                     <div class="col-md-6">
-                                                                        <label>First name*</label>
-                                                                        <input type="text" class="form-control" placeholder="" required>
+                                                                        <label>Prénom*</label>
+                                                                        <input type="text" class="form-control" placeholder="" value="<?php echo $user['prenom']; ?>" required>
                                                                     </div>
                                                                     <div class="col-md-6">
-                                                                        <label>Last name</label>
-                                                                        <input type="text" class="form-control" placeholder="">
+                                                                        <label>Nom</label>
+                                                                        <input type="text" class="form-control" value="<?php echo $user['nom']; ?>" placeholder="">
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-md-6">
                                                                         <label>Email*</label>
-                                                                        <input type="text" class="form-control" placeholder="mail@example.com" required>
+                                                                        <input type="text" class="form-control" value="<?php echo $user['email']; ?>" placeholder="mail@example.com" disabled="">
                                                                     </div>
                                                                     <div class="col-md-6">
-                                                                        <label>Phone</label>
-                                                                        <input type="text" class="form-control" placeholder="000-00-0000">
+                                                                        <label>Télephone</label>
+                                                                        <input type="text" class="form-control" value="<?php echo $user['tel']; ?>" placeholder="000-00-0000">
                                                                     </div>
                                                                 </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <label>Adresse*</label>
+                                                                        <textarea type="text" name="adresse" class="form-control" placeholder="" required><?php echo $user['adresse']; ?></textarea>                
+                                                                    </div>
+                                                                </div>
+                                                                 <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <label>Ville*</label>
+                                                                        <input type="text" class="form-control" value="<?php echo $user['ville']; ?>" placeholder="">
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <label>Code postal</label>
+                                                                        <input type="text" class="form-control" value="<?php echo $user['cp']; ?>" placeholder="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <label>Fax</label>
+                                                                        <input type="text" name="fax" class="form-control" value="<?php echo $user['fax']; ?>" placeholder="" required>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <label>Site web</label>
+                                                                        <input type="text" name="url" class="form-control" value="<?php echo $user['url']; ?>" placeholder="">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <label>SIREN</label>
+                                                                        <input type="text" name="siren" class="form-control" value="<?php echo $user['siren']; ?>" placeholder="" required>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <label>Numéro TVA</label>
+                                                                        <input type="text" name="tva" class="form-control" value="<?php echo $user['numtva']; ?>" placeholder="">
+                                                                    </div>
+                                                                </div>
+                                                                
 
-                                                                <h3>Security Question</h3>
-                                                                <div class="lighter"><p>Please choose a security question so we can better identify you if you forget your password, or in regard to your ad.</p></div>
-                                                                <label>Question</label>
-                                                                <select name="Security Questions" class="form-control selectpicker">
-                                                                    <option selected>What is your maiden name?</option>
-                                                                    <option selected>What is your pet's name?</option>
-                                                                    <option selected>What is your first school name?</option>
-                                                                    <option selected>What is your place of birth name?</option>
-                                                                    <option selected>Who is your favourite actor?</option>
-                                                                </select>
-                                                                <label>Answer</label>
-                                                                <input type="password" class="form-control">
+                                                               <button type="submit" class="btn btn-info">Update details</button>
 
                                                             </div>
                                                         </div>
@@ -124,77 +147,7 @@ if (!isset($_SESSION['user']))
                                                         <div class="row">
                                                             <div class="col-md-8">
                                                                 <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <label>City*</label>
-                                                                        <input type="text" class="form-control" placeholder="" required>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <label>Zip*</label>
-                                                                        <input type="text" class="form-control" placeholder="" required>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        <label>State*</label>
-                                                                        <select name="State" class="form-control selectpicker" required>
-                                                                            <option selected>Select</option>
-                                                                            <option value="AL">Alabama</option>
-                                                                            <option value="AK">Alaska</option>
-                                                                            <option value="AZ">Arizona</option>
-                                                                            <option value="AR">Arkansas</option>
-                                                                            <option value="CA">California</option>
-                                                                            <option value="CO">Colorado</option>
-                                                                            <option value="CT">Connecticut</option>
-                                                                            <option value="DE">Delaware</option>
-                                                                            <option value="DC">District Of Columbia</option>
-                                                                            <option value="FL">Florida</option>
-                                                                            <option value="GA">Georgia</option>
-                                                                            <option value="HI">Hawaii</option>
-                                                                            <option value="ID">Idaho</option>
-                                                                            <option value="IL">Illinois</option>
-                                                                            <option value="IN">Indiana</option>
-                                                                            <option value="IA">Iowa</option>
-                                                                            <option value="KS">Kansas</option>
-                                                                            <option value="KY">Kentucky</option>
-                                                                            <option value="LA">Louisiana</option>
-                                                                            <option value="ME">Maine</option>
-                                                                            <option value="MD">Maryland</option>
-                                                                            <option value="MA">Massachusetts</option>
-                                                                            <option value="MI">Michigan</option>
-                                                                            <option value="MN">Minnesota</option>
-                                                                            <option value="MS">Mississippi</option>
-                                                                            <option value="MO">Missouri</option>
-                                                                            <option value="MT">Montana</option>
-                                                                            <option value="NE">Nebraska</option>
-                                                                            <option value="NV">Nevada</option>
-                                                                            <option value="NH">New Hampshire</option>
-                                                                            <option value="NJ">New Jersey</option>
-                                                                            <option value="NM">New Mexico</option>
-                                                                            <option value="NY">New York</option>
-                                                                            <option value="NC">North Carolina</option>
-                                                                            <option value="ND">North Dakota</option>
-                                                                            <option value="OH">Ohio</option>
-                                                                            <option value="OK">Oklahoma</option>
-                                                                            <option value="OR">Oregon</option>
-                                                                            <option value="PA">Pennsylvania</option>
-                                                                            <option value="RI">Rhode Island</option>
-                                                                            <option value="SC">South Carolina</option>
-                                                                            <option value="SD">South Dakota</option>
-                                                                            <option value="TN">Tennessee</option>
-                                                                            <option value="TX">Texas</option>
-                                                                            <option value="UT">Utah</option>
-                                                                            <option value="VT">Vermont</option>
-                                                                            <option value="VA">Virginia</option>
-                                                                            <option value="WA">Washington</option>
-                                                                            <option value="WV">West Virginia</option>
-                                                                            <option value="WI">Wisconsin</option>
-                                                                            <option value="WY">Wyoming</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <label>&nbsp;</label>
-                                                                        <input type="text" class="form-control" disabled value="US">
-                                                                    </div>
+                                                                    Votre commande est sous traitement.
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -205,17 +158,17 @@ if (!isset($_SESSION['user']))
                                                             <div class="col-md-8">
                                                                 <div class="row">
                                                                     <div class="col-md-6">
-                                                                        <label>Old Password</label>
+                                                                        <label>Ancien mot de passe</label>
                                                                         <input type="password" class="form-control" placeholder="">
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-md-6">
-                                                                        <label>New password</label>
+                                                                        <label>Nouveau mot de passe</label>
                                                                         <input type="password" class="form-control" placeholder="">
                                                                     </div>
                                                                     <div class="col-md-6">
-                                                                        <label>Confirm new password</label>
+                                                                        <label>Confirmer nouveau mot de passe</label>
                                                                         <input type="password" class="form-control" placeholder="">
                                                                     </div>
                                                                 </div>
@@ -223,7 +176,7 @@ if (!isset($_SESSION['user']))
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button type="submit" class="btn btn-info">Update details</button>
+                                               
                                             </form>
                                         </div>
                                     </div>
@@ -297,7 +250,7 @@ if (!isset($_SESSION['user']))
             <a id="back-to-top"><i class="fa fa-angle-double-up"></i></a>  
         </div>
         <!-- LOGIN POPUP -->
-        <?php include("module/login.php") ?>
+<?php include("module/login.php") ?>
         <script src="js/jquery-2.0.0.min.js"></script> <!-- Jquery Library Call -->
         <script src="vendor/prettyphoto/js/prettyphoto.js"></script> <!-- PrettyPhoto Plugin -->
         <script src="js/ui-plugins.js"></script> <!-- UI Plugins -->

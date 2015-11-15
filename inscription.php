@@ -1,6 +1,8 @@
 <?php
 include("config.php");
 include("include/util.php");
+if (isset($_SESSION['user']))
+    header("location:profil.php");
 ?>
 <!DOCTYPE HTML>
 <html class="no-js">
@@ -105,10 +107,11 @@ include("include/util.php");
                                                             <div class="col-md-8">
                                                                 <div class="signup-form">
                                                                     <div class="row">
-                                                                        <div class="col-md-12"><label> Vous êtes : </label> </div>
-                                                                        <div class="col-md-3"><input type="radio" name="type_user" value="Professionnel" checked=""> <label>Professionnel</label>&nbsp;&nbsp;&nbsp;</div>
-                                                                        <div class="col-md-3"><input type="radio" name="type_user" value="Particulier">  <label>Particulier</label> </div>
-
+                                                                        <div class="input-group">
+                                                                            <label style="padding-left: 15px;">Vous êtes?</label><br>
+                                                                            <label class="checkbox-inline registeredv" style="font-weight: bold; font-size: 15px"><input type="radio" name="type_user" value="Professionnel" checked=""> Professionnel</label>
+                                                                            <label class="checkbox-inline noregisteredv" style="font-weight: bold; font-size: 15px"><input type="radio" name="type_user" value="Particulier"> Particulier</label>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -269,33 +272,7 @@ include("include/util.php");
             <a id="back-to-top"><i class="fa fa-angle-double-up"></i></a>  
         </div>
         <!-- LOGIN POPUP -->
-        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog"  aria-hidden="true">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4>Login to your account</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                <input type="text" class="form-control" placeholder="Username">
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                <input type="password" class="form-control" placeholder="Password">
-                            </div>
-                            <input type="submit" class="btn btn-primary" value="Login">
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-block btn-facebook btn-social"><i class="fa fa-facebook"></i> Login with Facebook</button>
-                        <button type="button" class="btn btn-block btn-twitter btn-social"><i class="fa fa-twitter"></i> Login with Twitter</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+         <?php include("module/login.php") ?>
         <script src="js/jquery-2.0.0.min.js"></script> <!-- Jquery Library Call -->
         <script src="vendor/prettyphoto/js/prettyphoto.js"></script> <!-- PrettyPhoto Plugin -->
         <script src="js/ui-plugins.js"></script> <!-- UI Plugins -->

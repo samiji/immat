@@ -3,14 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/wamp/www/immat/include/util.php</file>
             <file>file:/C:/wamp/www/immat/module/login.php</file>
+            <file>file:/C:/wamp/www/immat/module/header.php</file>
             <file>file:/C:/wamp/www/immat/config.php</file>
             <file>file:/C:/wamp/www/immat/profil.php</file>
-            <file>file:/C:/wamp/www/immat/user-dashboard-profile.html</file>
             <file>file:/C:/wamp/www/immat/appelwsdl.php</file>
             <file>file:/C:/wamp/www/immat/connexion.php</file>
-            <file>file:/C:/wamp/www/immat/index.php</file>
+            <file>file:/C:/wamp/www/immat/getListModele.php</file>
+            <file>file:/C:/wamp/www/immat/module/menu.php</file>
+            <file>file:/C:/wamp/www/immat/compte_inactif.php</file>
+            <file>file:/C:/wamp/www/immat/form.php</file>
+            <file>file:/C:/wamp/www/immat/valid_inscription_pro.php</file>
+            <file>file:/C:/wamp/www/immat/logout.php</file>
             <file>file:/C:/wamp/www/immat/valid_inscription.php</file>
+            <file>file:/C:/wamp/www/immat/index.php</file>
             <file>file:/C:/wamp/www/immat/inscription.php</file>
         </group>
     </open-files>

@@ -22,17 +22,13 @@
                         <img src="http://placehold.it/100x100&amp;text=IMAGE+PLACEHOLDER" alt="">
                         <span class="user-informa">
                             <span class="meta-data">Bienvenue</span>
-                            <span class="user-name"><?php echo getNomUser($_SESSION['user']);  ?></span>
+                            <span class="user-name"><?php echo getNomUser($_SESSION['user']); ?></span>
                         </span>
                         <span class="user-dd-dropper"><i class="fa fa-angle-down"></i></span>
                     </a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="userdropdown">
-                        <li><a href="user-dashboard.html">Dashboard</a></li>
-                        <li><a href="user-dashboard-saved-searches.html">Saved Searches</a></li>
-                        <li><a href="#">Manage Ads</a></li>
-                        <li><a href="profil.php">My Profile</a></li>
-                        <li><a href="#">Settings</a></li>
-                        <li><a href="logout.php">Log Out</a></li>
+                        <li><a href="profil.php">Mon compte</a></li>
+                        <li><a href="logout.php">Déconnexion</a></li>
                     </ul>
                 </div>
                 <div class="topnav dd-menu">

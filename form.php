@@ -12,7 +12,7 @@ if (!isset($_POST['choix']))
         <!-- Basic Page Needs
           ================================================== -->
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>Inscription</title>
+        <title>Information vihécule</title>
         <meta name="description" content="">
         <meta name="keywords" content="">
         <meta name="author" content="">
@@ -72,8 +72,10 @@ if (!isset($_POST['choix']))
                                                 $immat = $_POST['immatricultion'];
                                             else
                                                 $immat = "";
+
+                                            
                                             ?>
-                                            <form method="post" action="">
+                                            <form method="post" action="calculer.php">
                                                 <div class="tab-content">
                                                     <!-- PROFIE PERSONAL INFO -->
                                                     <div id="personalinfo" class="tab-pane fade active in">
@@ -87,7 +89,10 @@ if (!isset($_POST['choix']))
                                                                     <div class="row">
                                                                         <div class="col-md-6">
                                                                             <label>Marque</label>
-                                                                            <select class="form-control" id="marque" name="marque" onchange="getModele()">
+                                                                            <input type="hidden" name="choix" id="choix" value="<?php echo $choix ?>" />
+                                                                            <input type="hidden" name="immatriculation" id="immatriculation" value="<?php echo $immat ?>" />
+                                                                            <input type="hidden" name="num_immat" id="num_immat" value="<?php echo $_POST['immat_num'] ?>" />
+                                                                            <select class="form-control" id="marque" name="marque" onchange="getModele()" required="">
                                                                                 <option selected=""></option>
                                                                                 <?php
                                                                                 $sql_marque = mysql_query("select distinct marque from immat_marque");
@@ -100,11 +105,10 @@ if (!isset($_POST['choix']))
 
                                                                             </select>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row">
+
                                                                         <div class="col-md-6 ">
                                                                             <label>Modele</label>
-                                                                            <select class="form-control" id="modele" name="modele" ></select>
+                                                                            <select class="form-control" id="modele" name="modele" required=""<></select>
 
                                                                         </div>
                                                                     </div>
@@ -114,11 +118,13 @@ if (!isset($_POST['choix']))
                                                                             <input type="text" name="genre" id="genre" class="form-control" placeholder="" required>
 
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row">
+
                                                                         <div class="col-md-6 ">
                                                                             <label>Puissance fiscale</label>
-                                                                            <input type="text" name="puissance" id="puissance" class="form-control" placeholder="" required>
+                                                                            <div class="input-group">
+                                                                                <input type="text" required="" name="puissance" accept="puissance" placeholder="" class="form-control">
+                                                                                <span class="input-group-addon">Chevaux fiscaux</span>
+                                                                            </div>
 
                                                                         </div>
                                                                     </div>
@@ -132,11 +138,10 @@ if (!isset($_POST['choix']))
                                                                             </select>
 
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row">
+
                                                                         <div class="col-md-6 ">
                                                                             <label>Taux de CO2</label>
-                                                                            <input type="text" name="puissance" id="puissance" class="form-control" placeholder="" required>
+                                                                            <input type="text" name="taux" id="taux" class="form-control" placeholder="" required>
 
 
                                                                         </div>
@@ -144,17 +149,25 @@ if (!isset($_POST['choix']))
                                                                     <div class="row">
                                                                         <div class="col-md-6 ">
                                                                             <label>Email</label>
-                                                                            <input type="email" name="email" id="email" class="form-control" placeholder="" required>
+                                                                            <input type="email" name="email" id="email" class="form-control" placeholder="" value="<?php echo $_SESSION['user']; ?>" disabled="">
 
 
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row">
+
                                                                         <div class="col-md-6 ">
-                                                                            <label>Code postal</label>
-                                                                            <input type="text" name="cp" id="cp" class="form-control" placeholder="" required>
+                                                                            <label>Departement</label>
+                                                                            <select class="form-control" id="cp" name="cp" required="">
+                                                                                <option selected=""></option>
+                                                                                <?php
+                                                                                $sql_marque = mysql_query("select * from immat_cp_cheval_fiscal");
+                                                                                while ($data_marque = mysql_fetch_array($sql_marque)) {
+                                                                                    ?>
+                                                                                    <option value="<?php echo $data_marque['id']; ?>"><?php echo $data_marque['ville']; ?></option>
+                                                                                    <?php
+                                                                                }
+                                                                                ?>
 
-
+                                                                            </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -238,7 +251,7 @@ if (!isset($_POST['choix']))
             <a id="back-to-top"><i class="fa fa-angle-double-up"></i></a>  
         </div>
         <!-- LOGIN POPUP -->
-         <?php include("module/login.php") ?>
+        <?php include("module/login.php") ?>
         <script src="js/jquery-2.0.0.min.js"></script> <!-- Jquery Library Call -->
         <script src="vendor/prettyphoto/js/prettyphoto.js"></script> <!-- PrettyPhoto Plugin -->
         <script src="js/ui-plugins.js"></script> <!-- UI Plugins -->
