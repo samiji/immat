@@ -5,6 +5,27 @@ if (!isset($_SESSION['user']))
     header("location:index.php");
 
 $user = mysql_fetch_array(mysql_query("select * from immat_users where email='" . $_SESSION['user'] . "'"));
+
+
+if (isset($_POST["ancien"])) {
+    $ancien = md5($_POST["ancien"]);
+    $pwd_verif = mysql_query("select * from immat_users where email= '" . $_SESSION['user'] . "' and pwd='" . $ancien . "'")or die(mysql_error());
+    $nb = mysql_num_rows($pwd_verif);
+
+    if ($nb == 0) {
+        echo '<script>alert("Mot de passe érronée !");</script>';
+    } else {
+        $new = md5($_POST["new"]);
+        $new2 = md5($_POST["new2"]);
+        if (strcmp($new, $new2) !== 0) {
+            echo '<script>alert("Nouvelles mots de passe non identiques !");</script>';
+        } else {
+            mysql_query("update immat_users set pwd='" . $new . "' where email='" . $_SESSION['user'] . "'");
+            echo '<script>alert("Modifications effectuées avec succès !");</script>';
+            echo '<script>window.location="http://www.illico-immat.fr/mon-compte"</script>';
+        }
+    }
+}
 ?>
 <!DOCTYPE HTML>
 <html class="no-js">
@@ -35,6 +56,23 @@ $user = mysql_fetch_array(mysql_query("select * from immat_users where email='" 
         <!-- SCRIPTS
           ================================================== -->
         <script src="js/modernizr.js"></script><!-- Modernizr -->
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-71574959-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -43,7 +81,7 @@ $user = mysql_fetch_array(mysql_query("select * from immat_users where email='" 
         <div class="body">
             <!-- Start Site Header -->
             <div class="site-header-wrapper">
-<?php include("module/header.php"); ?>
+                <?php include("module/header.php"); ?>
                 <!-- End Site Header -->
                 <?php include("module/menu.php"); ?>
             </div>
@@ -56,11 +94,11 @@ $user = mysql_fetch_array(mysql_query("select * from immat_users where email='" 
                                 <div class="col-md-3 col-sm-4">
                                     <!-- SIDEBAR -->
                                     <div class="users-sidebar tbssticky">
-                                        <a href="index.php" class="btn btn-block btn-primary add-listing-btn">Commander</a>
+                                        <a href="http://www.illico-immat.fr" class="btn btn-block btn-primary add-listing-btn">Commander</a>
                                         <ul class="list-group">
-                                            <li class="list-group-item active"> <a href="profil.php"><i class="fa fa-user"></i> Mon profil</a></li>
-                                            
-                                            <li class="list-group-item"> <a href="logout.php"><i class="fa fa-sign-out"></i> Déconnexion</a></li>
+                                            <li class="list-group-item active"> <a href="mon-compte"><i class="fa fa-user"></i> Mon profil</a></li>
+
+                                            <li class="list-group-item"> <a href="deconnexion"><i class="fa fa-sign-out"></i> Déconnexion</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -73,20 +111,38 @@ $user = mysql_fetch_array(mysql_query("select * from immat_users where email='" 
                                                 <li> <a data-toggle="tab" href="#billinginfo" aria-controls="billinginfo" role="tab">Mes commandes</a></li>
                                                 <li> <a data-toggle="tab" href="#changepassword" aria-controls="changepassword" role="tab">Changer mot de passe</a></li>
                                             </ul>
-                                            <form>
-                                                <div class="tab-content">
-                                                    <!-- PROFIE PERSONAL INFO -->
-                                                    <div id="personalinfo" class="tab-pane fade active in">
-                                                        <div class="row">
-                                                            <div class="col-md-8">
+
+                                            <div class="tab-content">
+                                                <!-- PROFIE PERSONAL INFO -->
+                                                <div id="personalinfo" class="tab-pane fade active in">
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <?php
+                                                            if (isset($_POST["prenom"])) {
+                                                                $prenom = $_POST["prenom"];
+                                                                $nom = $_POST["nom"];
+                                                                $tel = $_POST["tel"];
+                                                                $adresse = $_POST["adresse"];
+                                                                $ville = $_POST["ville"];
+                                                                $cp = $_POST["cp"];
+                                                                $fax = $_POST["fax"];
+                                                                $url = $_POST["url"];
+                                                                $siren = $_POST["siren"];
+                                                                $tva = $_POST["tva"];
+                                                                mysql_query("update immat_users set prenom='" . $prenom . "', nom='" . $nom . "',tel='" . $tel . "',adresse='" . $adresse . "', ville='" . $ville . "', cp='" . $cp . "', fax='" . $fax . "', url='" . $url . "',siren='" . $siren . "',numtva='" . $tva . "' where email='" . $_SESSION['user'] . "'")or die(mysql_error());
+                                                                echo '<script>alert("Modifications effectuées avec succès !");</script>';
+                                                                echo '<script>window.location="http://www.illico-immat.fr/mon-compte"</script>';
+                                                            }
+                                                            ?>
+                                                            <form method="post" action="">
                                                                 <div class="row">
                                                                     <div class="col-md-6">
                                                                         <label>Prénom*</label>
-                                                                        <input type="text" class="form-control" placeholder="" value="<?php echo $user['prenom']; ?>" required>
+                                                                        <input type="text" class="form-control" name="prenom" placeholder="" value="<?php echo $user['prenom']; ?>">
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <label>Nom</label>
-                                                                        <input type="text" class="form-control" value="<?php echo $user['nom']; ?>" placeholder="">
+                                                                        <input type="text" class="form-control" name="nom" value="<?php echo $user['nom']; ?>" placeholder="">
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
@@ -96,23 +152,23 @@ $user = mysql_fetch_array(mysql_query("select * from immat_users where email='" 
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <label>Télephone</label>
-                                                                        <input type="text" class="form-control" value="<?php echo $user['tel']; ?>" placeholder="000-00-0000">
+                                                                        <input type="text" class="form-control" name="tel" value="<?php echo $user['tel']; ?>" placeholder="000-00-0000">
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <label>Adresse*</label>
-                                                                        <textarea type="text" name="adresse" class="form-control" placeholder="" required><?php echo $user['adresse']; ?></textarea>                
+                                                                        <textarea type="text" name="adresse" name="adresse" class="form-control" placeholder=""><?php echo $user['adresse']; ?></textarea>                
                                                                     </div>
                                                                 </div>
-                                                                 <div class="row">
+                                                                <div class="row">
                                                                     <div class="col-md-6">
                                                                         <label>Ville*</label>
-                                                                        <input type="text" class="form-control" value="<?php echo $user['ville']; ?>" placeholder="">
+                                                                        <input type="text" name="ville" class="form-control" value="<?php echo $user['ville']; ?>" placeholder="">
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <label>Code postal</label>
-                                                                        <input type="text" class="form-control" value="<?php echo $user['cp']; ?>" placeholder="">
+                                                                        <input type="text" name="cp" class="form-control" value="<?php echo $user['cp']; ?>" placeholder="">
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
@@ -135,49 +191,92 @@ $user = mysql_fetch_array(mysql_query("select * from immat_users where email='" 
                                                                         <input type="text" name="tva" class="form-control" value="<?php echo $user['numtva']; ?>" placeholder="">
                                                                     </div>
                                                                 </div>
-                                                                
 
-                                                               <button type="submit" class="btn btn-info">Update details</button>
 
+                                                                <button type="submit" class="btn btn-info">Modifier</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- PROFIE BILLING INFO -->
+                                                <div id="billinginfo" class="tab-pane fade">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <?php
+                                                                $sql_cmd = mysql_query("select * from immat_user_info_voiture where user='" . $_SESSION['user'] . "' and payer=1");
+                                                                $nb_cmd = mysql_num_rows($sql_cmd);
+                                                                if ($nb_cmd == 0) {
+                                                                    ?>
+                                                                    Vous n'avez aucune commande. cliquez <a href="http://www.illico-immat.fr">ici</a> pour commander.
+                                                                    <?php
+                                                                } else {
+                                                                    ?>
+                                                                    <table class="table">
+                                                                        <tr>
+                                                                            <td>Commande</td>
+                                                                            <td>Total</td>
+                                                                            <td>Date</td>
+                                                                            <td>Status</td>
+                                                                        </tr>  
+                                                                        <tbody>
+                                                                            <?php
+                                                                            while ($cmd_data = mysql_fetch_array($sql_cmd)) {
+                                                                                ?>
+                                                                                <tr>
+                                                                                    <td><?php echo $cmd_data['ref_cmd']; ?></td>
+                                                                                    <td><?php echo $cmd_data['total']; ?></td>
+                                                                                    <td><?php echo $cmd_data['date_add']; ?></td>
+                                                                                    <td><?php
+                                                                                        if ($cmd_data['status'] == 0)
+                                                                                            echo '<span class="label label-warning">En attente</span>';
+                                                                                        if ($cmd_data['status'] == 1)
+                                                                                            echo '<span class="label label-success">Validée</span>';
+                                                                                        if ($cmd_data['status'] == 2)
+                                                                                            echo '<span class="label label-danger"Annulée</span>';
+                                                                                        ?></td>
+                                                                                </tr>
+                                                                                <?php
+                                                                            }
+                                                                            ?>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <?php
+                                                                } // FIN IF
+                                                                ?>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!-- PROFIE BILLING INFO -->
-                                                    <div id="billinginfo" class="tab-pane fade">
-                                                        <div class="row">
-                                                            <div class="col-md-8">
-                                                                <div class="row">
-                                                                    Votre commande est sous traitement.
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- PROFIE CHANGE PASSWORD -->
-                                                    <div id="changepassword" class="tab-pane fade">
-                                                        <div class="row">
+                                                </div>
+                                                <!-- PROFIE CHANGE PASSWORD -->
+                                                <div id="changepassword" class="tab-pane fade">
+
+                                                    <div class="row">
+                                                        <form method="post" action="">
+
                                                             <div class="col-md-8">
                                                                 <div class="row">
                                                                     <div class="col-md-6">
                                                                         <label>Ancien mot de passe</label>
-                                                                        <input type="password" class="form-control" placeholder="">
+                                                                        <input type="password"  name="ancien" class="form-control" placeholder="">
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-md-6">
                                                                         <label>Nouveau mot de passe</label>
-                                                                        <input type="password" class="form-control" placeholder="">
+                                                                        <input type="password" name="new" class="form-control" placeholder="">
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <label>Confirmer nouveau mot de passe</label>
-                                                                        <input type="password" class="form-control" placeholder="">
+                                                                        <input type="password" name="new2" class="form-control" placeholder="">
                                                                     </div>
+                                                                    <button type="submit" class="btn btn-info">Modifier Mot de passe</button>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </form>
                                                     </div>
                                                 </div>
-                                               
-                                            </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -188,69 +287,12 @@ $user = mysql_fetch_array(mysql_query("select * from immat_users where email='" 
             </div>
             <!-- End Body Content -->
             <!-- Start site footer -->
-            <footer class="site-footer">
-                <div class="site-footer-top">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-3 col-sm-6 footer_widget widget widget_newsletter">
-                                <h4 class="widgettitle">Sign up for our newsletter</h4>
-                                <form>
-                                    <input type="text" class="form-control" placeholder="Name">
-                                    <input type="email" class="form-control" placeholder="Email">
-                                    <input type="submit" class="btn btn-primary btn-lg" value="Sign up now">
-                                </form>
-                            </div>
-                            <div class="col-md-2 col-sm-6 footer_widget widget widget_custom_menu widget_links">
-                                <h4 class="widgettitle">Blogroll</h4>
-                                <ul>
-                                    <li><a href="blog.html">Car News</a></li>
-                                    <li><a href="blog-masonry.html">Car Reviews</a></li>
-                                    <li><a href="about.html">Car Insurance</a></li>
-                                    <li><a href="about-html">Bodyshop</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-md-2 col-sm-6 footer_widget widget widget_custom_menu widget_links">
-                                <h4 class="widgettitle">Help &amp; Support</h4>
-                                <ul>
-                                    <li><a href="results-list.html">Buying a car</a></li>
-                                    <li><a href="joinus.html">Selling a car</a></li>
-                                    <li><a href="about.html">Online safety</a></li>
-                                    <li><a href="contact.html">Contact us</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-md-5 col-sm-6 footer_widget widget text_widget">
-                                <h4 class="widgettitle">About AutoStars</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viverra ante luctus vel. Donec vel mauris quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="site-footer-bottom">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 copyrights-left">
-                                <p>&copy; 2014 AutoStars. All Rights Reserved</p>
-                            </div>
-                            <div class="col-md-6 col-sm-6 copyrights-right">
-                                <ul class="social-icons social-icons-colored pull-right">
-                                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    <li class="youtube"><a href="#"><i class="fa fa-youtube"></i></a></li>
-                                    <li class="flickr"><a href="#"><i class="fa fa-flickr"></i></a></li>
-                                    <li class="vimeo"><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
-                                    <li class="digg"><a href="#"><i class="fa fa-digg"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <?php include("module/footer.php"); ?>
             <!-- End site footer -->
             <a id="back-to-top"><i class="fa fa-angle-double-up"></i></a>  
         </div>
         <!-- LOGIN POPUP -->
-<?php include("module/login.php") ?>
+        <?php include("module/login.php") ?>
         <script src="js/jquery-2.0.0.min.js"></script> <!-- Jquery Library Call -->
         <script src="vendor/prettyphoto/js/prettyphoto.js"></script> <!-- PrettyPhoto Plugin -->
         <script src="js/ui-plugins.js"></script> <!-- UI Plugins -->

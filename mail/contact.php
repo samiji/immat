@@ -1,5 +1,5 @@
 <?php
-
+include("../config.php");
 if(!$_POST) exit;
 
 // Email address verification, do not edit.
@@ -12,8 +12,10 @@ if (!defined("PHP_EOL")) define("PHP_EOL", "\r\n");
 $fname     = $_POST['fname'];
 $lname     = $_POST['lname'];
 $email    = $_POST['email'];
-$phone     = $_POST['subject'];
+$phone     = $_POST['phone'];
 $comments = $_POST['comments'];
+
+mysql_query("insert into immat_contact(nom,prenom,email,tel,msg,dt)values('".$lname."','".$fname."','".$email."','".$phone."','".$comments."','".date('Y-m-d')."')");
 
 if(trim($fname) == '') {
 	echo '<div class="alert alert-error">You must enter your first name.</div>';
@@ -36,23 +38,23 @@ if(get_magic_quotes_gpc()) {
 // Example $address = "joe.doe@yourdomain.com";
 
 //$address = "example@websiteurl.com";
-$address = "info@imithemes.com";
+$address = "illico-immat@gmail.com";
 
 
 // Configuration option.
 // i.e. The standard subject will appear as, "You've been contacted by John Doe."
 
 // Example, $e_subject = '$name . ' has contacted you via Your Website.';
-$e_subject = 'Contact Form';
+$e_subject = 'Contact Illico-Immat';
 
 
 // Configuration option.
 // You can change this if you feel that you need to.
 // Developers, you may wish to add more fields to the form, in which case you must be sure to add them here.
 
-$e_body = "You have been contacted by $fname $lname, their additional message is as follows." . PHP_EOL . PHP_EOL;
+$e_body = "Vous êtes contacté par $fname $lname, le message envoyé est :" . PHP_EOL . PHP_EOL;
 $e_content = "\"$comments\"" . PHP_EOL . PHP_EOL;
-$e_reply = "You can contact $fname $lname via Email $email or via Phone $phone";
+$e_reply = "Vous pouvez contacter $fname $lname via Email $email ou via Téléphone $phone";
 
 $msg = wordwrap( $e_body . $e_content . $e_reply, 70 );
 
@@ -67,8 +69,8 @@ if(mail($address, $e_subject, $msg, $headers)) {
 	// Email has sent successfully, echo a success page.
 
 	echo "<div class='alert alert-success'>";
-	echo "<h3>Email Sent Successfully.</h3><br>";
-	echo "<p>Thank you <strong>$name</strong>, your message has been submitted to us.</p>";
+	echo "<h3>Email Envoyé.</h3><br>";
+	echo "<p>Merci <strong>$name</strong>, votre message a été envoyé !.</p>";
 	echo "</div>";
 
 } else {

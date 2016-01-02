@@ -1,3 +1,19 @@
+<?php
+include("../config.php");
+include("../include/util.php");
+if (!isset($_SESSION['backend']))
+    header("location:login.php");
+
+$client_pro=  mysql_query("select * from immat_users where type='Professionnel'");
+$nb_client_pro=  mysql_num_rows($client_pro);
+$client_part=  mysql_query("select * from immat_users where type='Particulier'");
+$nb_client_part=  mysql_num_rows($client_part);
+$commande=  mysql_query("select * from immat_user_info_voiture where payer=1");
+$nb_commande=  mysql_num_rows($commande);
+$contact=  mysql_query("select * from immat_contact");
+$nb_contact=  mysql_num_rows($contact);
+?>
+
 <!doctype html>
 <html class="no-js">
   <head>
@@ -72,174 +88,7 @@
         </div>
 
         <!-- #menu -->
-        <ul id="menu" class="bg-blue dker">
-          <li class="nav-header">Menu</li>
-          <li class="nav-divider"></li>
-          <li class="active">
-            <a href="dashboard.html">
-              <i class="fa fa-dashboard"></i><span class="link-title">&nbsp;Dashboard</span> 
-            </a> 
-          </li>
-          <li>
-            <a href="client.php">
-              <i class="fa fa-user"></i>
-              <span class="link-title">Clients</span> 
-            </a> 
-          </li>
-          <li>
-            <a href="file.html">
-              <i class="fa fa-file"></i>
-              <span class="link-title">
-      File Manager
-          </span> 
-            </a> 
-          </li>
-          <li>
-            <a href="typography.html">
-              <i class="fa fa-font"></i>
-              <span class="link-title">
-            Typography
-          </span>  </a> 
-          </li>
-          <li>
-            <a href="maps.html">
-              <i class="fa fa-map-marker"></i><span class="link-title">
-            Maps
-          </span> 
-            </a> 
-          </li>
-          <li>
-            <a href="chart.html">
-              <i class="fa fa fa-bar-chart-o"></i>
-              <span class="link-title">
-            Charts
-          </span> 
-            </a> 
-          </li>
-          <li>
-            <a href="calendar.html">
-              <i class="fa fa-calendar"></i>
-              <span class="link-title">
-            Calendar
-          </span> 
-            </a> 
-          </li>
-          <li>
-            <a href="javascript:;">
-              <i class="fa fa-exclamation-triangle"></i>
-              <span class="link-title">
-              Error Pages
-            </span> 
-              <span class="fa arrow"></span> 
-            </a> 
-            <ul>
-              <li>
-                <a href="403.html">
-                  <i class="fa fa-angle-right"></i>&nbsp;403</a> 
-              </li>
-              <li>
-                <a href="404.html">
-                  <i class="fa fa-angle-right"></i>&nbsp;404</a> 
-              </li>
-              <li>
-                <a href="405.html">
-                  <i class="fa fa-angle-right"></i>&nbsp;405</a> 
-              </li>
-              <li>
-                <a href="500.html">
-                  <i class="fa fa-angle-right"></i>&nbsp;500</a> 
-              </li>
-              <li>
-                <a href="503.html">
-                  <i class="fa fa-angle-right"></i>&nbsp;503</a> 
-              </li>
-              <li>
-                <a href="offline.html">
-                  <i class="fa fa-angle-right"></i>&nbsp;offline</a> 
-              </li>
-              <li>
-                <a href="countdown.html">
-                  <i class="fa fa-angle-right"></i>&nbsp;Under Construction</a> 
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="grid.html">
-              <i class="fa fa-columns"></i>
-              <span class="link-title">
-    Grid
-    </span> 
-            </a> 
-          </li>
-          <li>
-            <a href="blank.html">
-              <i class="fa fa-square-o"></i>
-              <span class="link-title">
-    Blank Page
-    </span> 
-            </a> 
-          </li>
-          <li class="nav-divider"></li>
-          <li>
-            <a href="login.html">
-              <i class="fa fa-sign-in"></i>
-              <span class="link-title">
-    Login Page
-    </span> 
-            </a> 
-          </li>
-          <li>
-            <a href="javascript:;">
-              <i class="fa fa-code"></i>
-              <span class="link-title">
-    	Unlimited Level Menu 
-    	</span> 
-              <span class="fa arrow"></span> 
-            </a> 
-            <ul>
-              <li>
-                <a href="javascript:;">Level 1  <span class="fa arrow"></span>  </a> 
-                <ul>
-                  <li> <a href="javascript:;">Level 2</a>  </li>
-                  <li> <a href="javascript:;">Level 2</a>  </li>
-                  <li>
-                    <a href="javascript:;">Level 2  <span class="fa arrow"></span>  </a> 
-                    <ul>
-                      <li> <a href="javascript:;">Level 3</a>  </li>
-                      <li> <a href="javascript:;">Level 3</a>  </li>
-                      <li>
-                        <a href="javascript:;">Level 3  <span class="fa arrow"></span>  </a> 
-                        <ul>
-                          <li> <a href="javascript:;">Level 4</a>  </li>
-                          <li> <a href="javascript:;">Level 4</a>  </li>
-                          <li>
-                            <a href="javascript:;">Level 4  <span class="fa arrow"></span>  </a> 
-                            <ul>
-                              <li> <a href="javascript:;">Level 5</a>  </li>
-                              <li> <a href="javascript:;">Level 5</a>  </li>
-                              <li> <a href="javascript:;">Level 5</a>  </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </li>
-                      <li> <a href="javascript:;">Level 4</a>  </li>
-                    </ul>
-                  </li>
-                  <li> <a href="javascript:;">Level 2</a>  </li>
-                </ul>
-              </li>
-              <li> <a href="javascript:;">Level 1</a>  </li>
-              <li>
-                <a href="javascript:;">Level 1  <span class="fa arrow"></span>  </a> 
-                <ul>
-                  <li> <a href="javascript:;">Level 2</a>  </li>
-                  <li> <a href="javascript:;">Level 2</a>  </li>
-                  <li> <a href="javascript:;">Level 2</a>  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul><!-- /#menu -->
+        <?php include("menu.php");  ?><!-- /#menu -->
       </div><!-- /#left -->
       <div id="content">
         <div class="outer">
@@ -249,22 +98,22 @@
               <a class="quick-btn" href="client.php">
                 <i class="fa fa-users fa-2x"></i>
                 <span>PRO</span> 
-                <span class="label label-default">2</span> 
+                <span class="label label-default"><?php echo $nb_client_pro; ?></span> 
               </a> 
               <a class="quick-btn" href="client.php">
                 <i class="fa fa-users fa-2x"></i>
                 <span>Particuliers</span> 
-                <span class="label label-danger">2</span> 
+                <span class="label label-danger"><?php echo $nb_client_part; ?></span> 
               </a> 
               <a class="quick-btn" href="commande.php">
                 <i class="fa fa-money fa-2x"></i>
                 <span>Commandes</span> 
-                 <span class="label label-danger">2</span> 
+                 <span class="label label-info"><?php echo $nb_commande; ?></span> 
               </a> 
               <a class="quick-btn" href="contact.php">
                 <i class="fa fa-envelope fa-2x"></i>
                 <span>Contacts</span> 
-                <span class="label label-success">-456</span> 
+                <span class="label label-success"><?php echo $nb_contact;  ?></span> 
               </a> 
               
             </div>

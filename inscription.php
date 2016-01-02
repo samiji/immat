@@ -33,6 +33,23 @@ if (isset($_SESSION['user']))
         <!-- SCRIPTS
           ================================================== -->
         <script src="js/modernizr.js"></script><!-- Modernizr -->
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-71574959-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -83,14 +100,72 @@ if (isset($_SESSION['user']))
 
                                                     if ($type_user == "Professionnel") {
                                                         mysql_query("insert into immat_users(nom,prenom,adresse,cp,ville,tel,email,pwd,societe,fax,url,siren,numtva,date_add,status,type)values('" . $nom . "','" . $prenom . "','" . $adresse . "','" . $cp . "','" . $ville . "','" . $tel . "','" . $login . "','" . $password . "','" . $societe . "','" . $fax . "','" . $url . "','" . $siren . "','" . $tva . "','" . date('Y-m-d H:i:s') . "',0,'" . $type_user . "')")or die(mysql_error());
-                                                        $message = "Bonjour Mr " . $prenom . ", <br>Merci pour votre inscription à notre site Illico-Immat.<br>Veuillez completer votre inscription avec l'envoie des docuement necessaire à l'adresse postal : <br>Cordialement,<br>Illico-Immat Team ";
+                                                        $message = "Bonjour Madame, Monsieur,\n
+
+Nous vous remercions de votre visite sur le site illico-immat.fr. Vous recevrez une réponse à votre demande dans les meilleurs délais.\n
+
+Attention : ce message étant envoyé automatiquement, vous ne pouvez y répondre. Nous vous 
+
+invitons à vous reconnecter sur le site illico-immat.fr pour toute autre demande.\n
+
+L'Équipe ILLICO IMMAT FRANCE.\n
+
+La lettre d'information de ILLICO IMMAT FRANCE Particuliers :\n
+
+Rendez-vous à l'adresse suivante : http://illico-immat.fr/newsletter-presentation/ pour tout savoir chaque mois de l'actualité de nos produits et promotions.\n
+
+Information sécurité:\n
+
+Lorsque ILLICO IMMAT FRANCE vous adresse un courriel (e.mail), nous appliquons les règles de sécurité suivantes :\n
+
+- le courriel est référencé avec ILLICO IMMAT comme expéditeur,\n
+
+- le courriel ne vous invite pas à communiquer vos codes personnels ou des informations personnelles ou bancaires.\n
+
+Attention : si ces règles ne sont pas respectées, il s'agit très probablement d'un courriel frauduleux.\n
+
+En cas de doute sur l'origine du courriel : ne répondez pas, ne tenez pas compte des informations 
+
+qu'il contient, ne cliquez sur aucun lien, n'appelez pas les éventuels numéros indiqués. Faites suivre 
+
+le courriel que vous avez reçu à l'adresse e-mail que vous trouverez dans notre dossier de sécurité 
+
+sur la page : https://informations.illico-immat.fr/securite/.\n
+
+Enfin, détruisez le courriel suspect.";
                                                         mail($login, "Inscription au site Illico-Immat", $message, $headers);
-                                                        echo '<script>window.location="valid_inscription_pro.php"</script>';
+                                                        echo '<script>window.location="http://www.illico-immat.fr/validation-inscription-pro"</script>';
                                                     } else {
                                                         mysql_query("insert into immat_users(nom,prenom,adresse,cp,ville,tel,email,pwd,societe,fax,url,siren,numtva,date_add,status,type)values('" . $nom . "','" . $prenom . "','" . $adresse . "','" . $cp . "','" . $ville . "','" . $tel . "','" . $login . "','" . $password . "','" . $societe . "','" . $fax . "','" . $url . "','" . $siren . "','" . $tva . "','" . date('Y-m-d H:i:s') . "',1,'" . $type_user . "')")or die(mysql_error());
-                                                        $message = "Bonjour Mr " . $prenom . ", <br>Merci pour votre inscription à notre site Illico-Immat.<br>Cordialement,<br>Illico-Immat Team ";
+                                                        $message = "Bonjour Madame, Monsieur,\n
+
+Nous vous remercions de votre inscription sur le site illico-immat.fr. Vous pouvez des-à-présent profiter des prestations de l'équipe ILLICO IMMAT FRANCE.\n
+
+Attention : ce message étant envoyé automatiquement, vous ne pouvez y répondre. \n
+
+L'Équipe ILLICO IMMAT FRANCE.\n
+
+La lettre d'information de ILLICO IMMAT FRANCE Particuliers :\n
+
+Rendez-vous à l'adresse suivante : http://illico-immat.fr/newsletter-presentation/ pour tout savoir chaque mois de l'actualité de nos produits et promotions.\n
+
+Information sécurité :\n
+
+Lorsque ILLICO IMMAT FRANCE vous adresse un courriel (e.mail), nous appliquons les règles de sécurité suivantes :\n
+
+- le courriel est référencé avec ILLICO IMMAT comme expéditeur,\n
+
+- le courriel ne vous invite pas à communiquer vos codes personnels ou des informations personnelles ou bancaires.\n
+
+Attention : si ces règles ne sont pas respectées, il s'agit très probablement d'un courriel frauduleux.\n
+
+En cas de doute sur l'origine du courriel : ne répondez pas, ne tenez pas compte des informations qu'il contient, ne cliquez sur aucun lien, n'appelez pas les éventuels numéros indiqués. Faites suivre 
+
+le courriel que vous avez reçu à l'adresse e-mail que vous trouverez dans notre dossier de sécurité sur la page : https://informations.illico-immat.fr/securite/.\n
+
+Enfin, détruisez le courriel suspect.";
                                                         mail($login, "Inscription au site Illico-Immat", $message, $headers);
-                                                        echo '<script>window.location="valid_inscription.php"</script>';
+                                                        echo '<script>window.location="http://www.illico-immat.fr/validation-inscription"</script>';
                                                     }
                                                 } else {
                                                     echo '<script>alert("Adresse mail déjà existante !")</script>';
@@ -109,8 +184,8 @@ if (isset($_SESSION['user']))
                                                                     <div class="row">
                                                                         <div class="input-group">
                                                                             <label style="padding-left: 15px;">Vous êtes?</label><br>
-                                                                            <label class="checkbox-inline registeredv" style="font-weight: bold; font-size: 15px"><input type="radio" name="type_user" value="Professionnel" checked=""> Professionnel</label>
-                                                                            <label class="checkbox-inline noregisteredv" style="font-weight: bold; font-size: 15px"><input type="radio" name="type_user" value="Particulier"> Particulier</label>
+                                                                            <label class="checkbox-inline registeredv" style="font-weight: bold; font-size: 15px" onclick="show_bloc()"><input type="radio" name="type_user" value="Professionnel" checked=""> Professionnel</label>
+                                                                            <label class="checkbox-inline noregisteredv" style="font-weight: bold; font-size: 15px" onclick="hide_bloc()"><input type="radio" name="type_user" value="Particulier"> Particulier</label>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -123,15 +198,21 @@ if (isset($_SESSION['user']))
                                                                 <div class="signup-form">
                                                                     <div class="row">
                                                                         <div class="col-md-6">
-                                                                            <label>Nom d'utilisateur</label>
+                                                                            <label>Nom d'utilisateur *</label>
                                                                             <input type="email" class="form-control" name="login" placeholder="mail@example.com" required>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="col-md-6 ">
+                                                                            <label>Mot de passe *</label>
                                                                             <div class="" style="position: relative; display: block; vertical-align: baseline; margin: 0px 0px 5px;"><input type="password" name="pwd" placeholder="Saisir un mot de passe" class="form-control password-input margin-5 hideShowPassword-field" style="margin: 0px; padding-right: 46px;"></div>
                                                                             <a class="password-generate pass-actions" href="javascript:void(0);"><i class="fa fa-refresh"></i></a>
                                                                             <div class="progress"><div style="width: 0%" class="progress-bar password-output"></div></div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <label>Confirmer mot de passe *</label>
+                                                                            <input type="password" class="form-control" name="pwd2" placeholder="Confirmer mot de passe" required>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -142,57 +223,59 @@ if (isset($_SESSION['user']))
                                                                         <input type="text" name="prenom" class="form-control" placeholder="" required>
                                                                     </div>
                                                                     <div class="col-md-6">
-                                                                        <label>Nom</label>
-                                                                        <input type="text" name="nom" class="form-control" placeholder="">
+                                                                        <label>Nom *</label>
+                                                                        <input type="text" name="nom" class="form-control" placeholder="" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-md-6">
-                                                                        <label>Société *</label>
-                                                                        <input type="text" name="societe" class="form-control" placeholder="" required>
+                                                                        <label>Adresse</label>
+                                                                        <input type="text" name="adresse" class="form-control" placeholder="" />
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <label>Téléphone</label>
                                                                         <input type="text" name="tel" class="form-control" placeholder="">
                                                                     </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <label>Adresse *</label>
-                                                                        <textarea type="text" name="adresse" class="form-control" placeholder="" required></textarea>
-                                                                    </div>
-
-                                                                </div>
+                                                                </div>  
                                                                 <div class="row">
                                                                     <div class="col-md-6">
-                                                                        <label>Code postal *</label>
-                                                                        <input type="text" name="cp" class="form-control" placeholder="" required>
+                                                                        <label>Code postal</label>
+                                                                        <input type="text" name="cp" class="form-control" placeholder="">
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <label>Ville</label>
                                                                         <input type="text" name="ville" class="form-control" placeholder="">
                                                                     </div>
                                                                 </div>
-                                                                <div class="row">
+
+
+                                                                <div class="row" id="bloc_pro">
+                                                                    <div class="col-md-6">
+
+                                                                        <label>Société</label>
+                                                                        <input type="text" name="societe" class="form-control" placeholder="">
+                                                                    </div>
                                                                     <div class="col-md-6">
                                                                         <label>Fax</label>
-                                                                        <input type="text" name="fax" class="form-control" placeholder="" required>
+                                                                        <input type="text" name="fax" class="form-control" placeholder="">
                                                                     </div>
+
                                                                     <div class="col-md-6">
                                                                         <label>Site web</label>
                                                                         <input type="text" name="url" class="form-control" placeholder="">
                                                                     </div>
-                                                                </div>
-                                                                <div class="row">
+
+
                                                                     <div class="col-md-6">
                                                                         <label>SIREN</label>
-                                                                        <input type="text" name="siren" class="form-control" placeholder="" required>
+                                                                        <input type="text" name="siren" class="form-control" placeholder="">
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <label>Numéro TVA</label>
                                                                         <input type="text" name="tva" class="form-control" placeholder="">
                                                                     </div>
                                                                 </div>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -210,69 +293,12 @@ if (isset($_SESSION['user']))
             </div>
             <!-- End Body Content -->
             <!-- Start site footer -->
-            <footer class="site-footer">
-                <div class="site-footer-top">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-3 col-sm-6 footer_widget widget widget_newsletter">
-                                <h4 class="widgettitle">Sign up for our newsletter</h4>
-                                <form>
-                                    <input type="text" class="form-control" placeholder="Name">
-                                    <input type="email" class="form-control" placeholder="Email">
-                                    <input type="submit" class="btn btn-primary btn-lg" value="Sign up now">
-                                </form>
-                            </div>
-                            <div class="col-md-2 col-sm-6 footer_widget widget widget_custom_menu widget_links">
-                                <h4 class="widgettitle">Blogroll</h4>
-                                <ul>
-                                    <li><a href="blog.html">Car News</a></li>
-                                    <li><a href="blog-masonry.html">Car Reviews</a></li>
-                                    <li><a href="about.html">Car Insurance</a></li>
-                                    <li><a href="about-html">Bodyshop</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-md-2 col-sm-6 footer_widget widget widget_custom_menu widget_links">
-                                <h4 class="widgettitle">Help &amp; Support</h4>
-                                <ul>
-                                    <li><a href="results-list.html">Buying a car</a></li>
-                                    <li><a href="joinus.html">Selling a car</a></li>
-                                    <li><a href="about.html">Online safety</a></li>
-                                    <li><a href="contact.html">Contact us</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-md-5 col-sm-6 footer_widget widget text_widget">
-                                <h4 class="widgettitle">About AutoStars</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viverra ante luctus vel. Donec vel mauris quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="site-footer-bottom">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6 copyrights-left">
-                                <p>&copy; 2014 AutoStars. All Rights Reserved</p>
-                            </div>
-                            <div class="col-md-6 col-sm-6 copyrights-right">
-                                <ul class="social-icons social-icons-colored pull-right">
-                                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    <li class="youtube"><a href="#"><i class="fa fa-youtube"></i></a></li>
-                                    <li class="flickr"><a href="#"><i class="fa fa-flickr"></i></a></li>
-                                    <li class="vimeo"><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
-                                    <li class="digg"><a href="#"><i class="fa fa-digg"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <?php include("module/footer.php") ?>
             <!-- End site footer -->
             <a id="back-to-top"><i class="fa fa-angle-double-up"></i></a>  
         </div>
         <!-- LOGIN POPUP -->
-         <?php include("module/login.php") ?>
+        <?php include("module/login.php") ?>
         <script src="js/jquery-2.0.0.min.js"></script> <!-- Jquery Library Call -->
         <script src="vendor/prettyphoto/js/prettyphoto.js"></script> <!-- PrettyPhoto Plugin -->
         <script src="js/ui-plugins.js"></script> <!-- UI Plugins -->
@@ -283,5 +309,13 @@ if (isset($_SESSION['user']))
         <script src="js/init.js"></script> <!-- All Scripts -->
         <script src="vendor/flexslider/js/jquery.flexslider.js"></script> <!-- FlexSlider -->
         <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+        <script>
+                                                                                function hide_bloc() {
+                                                                                    $("#bloc_pro").hide();
+                                                                                }
+                                                                                function show_bloc() {
+                                                                                    $("#bloc_pro").show();
+                                                                                }
+        </script>
     </body>
 </html>

@@ -18,9 +18,11 @@
                     </div>
                     <input type="button" class="btn btn-primary" value="Connexion" onclick="connexion()">
                 </form>
+                 <a href="mot-de-passe-oublie" type="button" class="btn btn-link"><i class="fa fa-eraser"></i> Mot de passe oublié?</a>
             </div>
             <div class="modal-footer">
-                <a href="inscription.php" type="button" class="btn btn-block btn-facebook btn-social"><i class="fa fa-lock"></i> Créer mon compte</a>
+               
+                <a href="inscription" type="button" class="btn btn-block btn-facebook btn-social"><i class="fa fa-lock"></i> Créer mon compte</a>
 
             </div>
         </div>
@@ -37,9 +39,9 @@
                 if (t[0]["message"] == "ok") {
                     if (t[0]["etat"] == "1") {
 
-                        window.location = "profil.php";
+                        window.location = "mon-compte";
                     } else {
-                        window.location = "compte_inactif.php";
+                        window.location = "compte-inactif";
                     }
                 } else {
                     alert("Veuillez vérifier vos paramètres de connexion !");

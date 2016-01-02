@@ -5,5 +5,5 @@ function getNomUser($login) {
     $data = mysql_fetch_array($sql);
     return ucfirst($data['prenom']) . " " . strtoupper($data['nom']);
 }
-
+define("url","http://www.illico-immat.fr/");
 ?>

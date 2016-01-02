@@ -72,46 +72,22 @@ if (!isset($_SESSION['backend']))
                     <div class="user-media-toggleHover">
                         <span class="fa fa-user"></span> 
                     </div>
-                    
+
                 </div>
 
                 <!-- #menu -->
-                <ul id="menu" class="bg-blue dker">
-                    <li class="nav-header">Menu</li>
-                    <li class="nav-divider"></li>
-                    <li class="">
-                        <a href="index.php">
-                            <i class="fa fa-dashboard"></i><span class="link-title">&nbsp;Dashboard</span> 
-                        </a> 
-                    </li>
-                    <li class="active">
-                        <a href="client.php">
-                            <i class="fa fa-user"></i>
-                            <span class="link-title">Clients</span> 
-                        </a> 
-                    </li>
-                    <li>
-                        <a href="commande.php">
-                            <i class="fa fa-file"></i>
-                            <span class="link-title">
-                                Commandes
-                            </span> 
-                        </a> 
-                    </li>
-                    <li>
-                        <a href="deconnect.php">
-                            <i class="fa fa-sign-out"></i>
-                            <span class="link-title">
-                                Déconnexion
-                            </span> 
-                        </a> 
-                    </li> 
-                </ul><!-- /#menu -->
+                <?php include("menu.php"); ?><!-- /#menu -->
             </div><!-- /#left -->
             <div id="content">
                 <div class="outer">
                     <div class="inner bg-light lter">
-
+                        <?php
+                        if (isset($_GET['id'])) {
+                            mysql_query("delete from immat_users where id=" . $_GET['id']);
+                            echo '<script>alert("Client supprimé !");</script>';
+                            echo '<script>window.location="client.php"</script>';
+                        }
+                        ?>
                         <!--Begin Datatables-->
                         <div class="row">
                             <div class="col-lg-12">
@@ -140,12 +116,29 @@ if (!isset($_SESSION['backend']))
                                                 while ($data = mysql_fetch_array($sql)) {
                                                     ?>
                                                     <tr>
-                                                        <td><span class="label label-<?php if($data['type']=="Professionnel") echo "success"; else echo "info"; ?>"><?php echo $data['type'];  ?></span></td>
-                                                        <td><?php echo $data['prenom']." ".$data['nom'];  ?></td>
-                                                        <td><?php echo $data['email'];  ?></td>
-                                                        <td><span class="label label-<?php if($data['status']=="0") echo "danger"; else echo "default"; ?>"><?php if($data['status']==0) echo "Inactif"; else echo "Actif";  ?></span></td>
-                                                        <td><?php echo $data['date_add'];  ?></td>
-                                                        <td><a href="detail.php?id=<?php echo $data['id'];  ?>" class="btn btn-warning btn-xs">Détail</a></td>
+                                                        <td><span class="label label-<?php
+                                                            if ($data['type'] == "Professionnel")
+                                                                echo "success";
+                                                            else
+                                                                echo "info";
+                                                            ?>"><?php echo $data['type']; ?></span></td>
+                                                        <td><?php echo $data['prenom'] . " " . $data['nom']; ?></td>
+                                                        <td><?php echo $data['email']; ?></td>
+                                                        <td><span class="label label-<?php
+                                                            if ($data['status'] == "0")
+                                                                echo "danger";
+                                                            else
+                                                                echo "default";
+                                                            ?>"><?php
+                                                                      if ($data['status'] == 0)
+                                                                          echo "Inactif";
+                                                                      else
+                                                                          echo "Actif";
+                                                                      ?></span></td>
+                                                        <td><?php echo $data['date_add']; ?></td>
+                                                        <td><a href="detail.php?id=<?php echo $data['id']; ?>" class="btn btn-success btn-xs">Détail</a>
+                                                            <a href="client.php?id=<?php echo $data['id']; ?>" class="btn btn-danger btn-xs">Supprimer</a>
+                                                        </td>
                                                     </tr>
                                                     <?php
                                                 }
